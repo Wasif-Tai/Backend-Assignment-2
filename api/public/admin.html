@@ -3,140 +3,179 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f6f1">
-  <title>Products · Atelier Admin</title>
+  <meta name="theme-color" content="#171a20">
+  <meta name="description" content="Manage your products and catalog.">
+  <title>Products · Stockroom</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tokens.css">
-  <link rel="stylesheet" href="products.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
 </head>
-<body>
-  <header class="admin-nav">
-    <a class="brand" href="/admin.html" aria-label="Atelier Admin home">
-      <span class="brand-mark" aria-hidden="true">A</span>
-      <span>atelier<span class="brand-light"> / studio</span></span>
-    </a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link nav-link--active" href="#listing" aria-current="page">Products</a>
-    </nav>
-    <a class="store-link" href="/" aria-label="Visit the store">View site <span aria-hidden="true">↗</span></a>
-  </header>
+<body class="dashboard-page">
+  <div class="dashboard-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand brand--sidebar" href="/" aria-label="Stockroom home">
+        <span class="brand-icon" aria-hidden="true">s</span>
+        <span>stockroom</span>
+      </a>
+      <p class="sidebar-label">WORKSPACE</p>
+      <nav class="sidebar-nav" aria-label="Dashboard">
+        <a class="sidebar-link sidebar-link--active" href="#overview" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg>
+          Dashboard
+        </a>
+        <a class="sidebar-link" href="#products">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m4 8 8-4 8 4-8 4-8-4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          All products
+        </a>
+        <a class="sidebar-link" href="#add-product">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Add product
+        </a>
+      </nav>
+    </aside>
 
-  <main class="admin-page">
-    <section class="hero admin-hero" aria-labelledby="page-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot"></span> Your workspace <span class="eyebrow-divider">/</span> Inventory</p>
-        <h1 id="page-title">Make room for<br>something <em>good.</em></h1>
-        <p class="hero-description">A thoughtful collection starts here. Add a product and it’s ready for the shop.</p>
-        <a class="hero-link" href="#add-product">Add your first product <span aria-hidden="true">↓</span></a>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="art-orbit art-orbit--outer"></div>
-        <div class="art-orbit art-orbit--inner"></div>
-        <div class="art-sun"></div>
-        <div class="art-object">
-          <span class="art-object__stem"></span>
-          <span class="art-object__body"></span>
-          <span class="art-object__base"></span>
-        </div>
-        <span class="art-caption">OBJECTS, WITH INTENTION — 01</span>
-      </div>
-    </section>
+    <div class="dashboard-main">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuButton" type="button" aria-label="Open dashboard navigation" aria-expanded="false" aria-controls="sidebar">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="breadcrumbs"><span>Workspace</span><span aria-hidden="true">/</span><strong>Overview</strong></div>
+        <a class="topbar-home" href="#add-product" aria-label="Add product">
+          <span>Quick add</span>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12m-6-6h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </a>
+      </header>
 
-    <section class="add-section" id="add-product" aria-labelledby="add-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">01 <span class="eyebrow-divider">/</span> Product details</p>
-          <h2 id="add-title">Add something new</h2>
-        </div>
-        <p class="section-aside">Good things deserve<br>a place on the shelf.</p>
-      </div>
-      <div class="form-panel">
-        <form id="productForm">
-          <div class="form-fields">
-            <label class="field">
-              <span class="field-label">Product name <span class="required-mark">*</span></span>
-              <input id="name" name="name" maxlength="120" placeholder="e.g. The Everyday Tote" autocomplete="off" required>
-            </label>
-            <label class="field">
-              <span class="field-label">Price <span class="required-mark">*</span></span>
-              <span class="price-input">
-                <span aria-hidden="true">PKR</span>
-                <input id="price" name="price" type="number" min="0" step="any" placeholder="0.00" required>
-              </span>
-            </label>
-            <label class="field field--wide">
-              <span class="field-label">A little about it <span class="field-optional">Optional</span></span>
-              <textarea id="description" name="description" maxlength="2000" rows="3" placeholder="What makes this one special?"></textarea>
-            </label>
-            <div class="field field--wide">
-              <span class="field-label">Product photography <span class="required-mark">*</span></span>
-              <label class="upload-zone" for="image">
-                <input id="image" name="image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
-                <span class="upload-preview" id="uploadPreview" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <span class="upload-copy">
-                  <strong id="uploadTitle">Choose an image <span>or drag it here</span></strong>
-                  <span id="uploadHint">JPG, PNG or WEBP <span class="upload-separator">·</span> up to 5 MB</span>
-                </span>
-                <span class="upload-browse">Browse files</span>
+      <main class="dashboard-content">
+        <section class="dashboard-welcome" id="overview">
+          <div>
+            <p class="section-kicker">PRODUCT MANAGEMENT</p>
+            <h1>Your products, in one place.</h1>
+            <p class="welcome-copy">Keep your catalog tidy. Add a product or review what’s already on the shelf.</p>
+          </div>
+          <a class="button button--primary" href="#add-product">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12m-6-6h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Add product
+          </a>
+        </section>
+
+        <section class="overview-grid" aria-label="Catalog overview">
+          <article class="metric-card">
+            <div class="metric-label"><span class="metric-icon metric-icon--blue" aria-hidden="true">▦</span><span>Total products</span></div>
+            <p class="metric-value" id="productCount" aria-live="polite">—</p>
+            <p class="metric-caption">Products in your catalog</p>
+          </article>
+          <article class="metric-card metric-card--latest">
+            <div class="metric-label"><span class="metric-icon metric-icon--green" aria-hidden="true">↗</span><span>Latest addition</span></div>
+            <p class="metric-value metric-value--latest" id="latestProduct" aria-live="polite">Loading…</p>
+            <p class="metric-caption" id="latestDate">Based on your product catalog</p>
+          </article>
+        </section>
+
+        <section class="panel product-panel" id="products" aria-labelledby="productsTitle">
+          <div class="panel-heading">
+            <div>
+              <h2 id="productsTitle">All products</h2>
+              <p>Every item currently saved to your catalog.</p>
+            </div>
+            <div class="panel-actions">
+              <label class="search-box">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span class="visually-hidden">Search products</span>
+                <input id="productSearch" type="search" placeholder="Search products">
               </label>
+              <button class="button button--secondary button--refresh" id="refreshButton" type="button">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.5 7.5A6.75 6.75 0 0 0 4.5 5.75L3.25 7M3.25 7V3.75M3.25 7H6.5M3.5 12.5a6.75 6.75 0 0 0 12 1.75L16.75 13m0 0v3.25M16.75 13H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Refresh
+              </button>
             </div>
           </div>
-          <div class="form-footer">
-            <p class="form-message" id="formMessage" aria-live="polite"></p>
-            <button class="submit-button" type="submit">
-              <span>Add to products</span><span class="button-arrow" aria-hidden="true">↗</span>
-            </button>
+          <div class="table-wrap">
+            <table class="product-table">
+              <thead>
+                <tr><th scope="col">PRODUCT</th><th scope="col">DESCRIPTION</th><th scope="col">PRICE</th><th scope="col">DATE ADDED</th><th scope="col">ACTIONS</th></tr>
+              </thead>
+              <tbody id="productRows"></tbody>
+            </table>
+            <div class="table-state" id="listMessage" role="status" aria-live="polite">Loading products…</div>
           </div>
-        </form>
-      </div>
-    </section>
+          <div class="panel-footer"><span id="resultCount">Loading products…</span><span>Prices shown in PKR</span></div>
+        </section>
 
-    <section class="product-section" id="listing" aria-labelledby="listing-title">
-      <div class="section-heading section-heading--listing">
-        <div>
-          <p class="eyebrow">02 <span class="eyebrow-divider">/</span> Your collection</p>
-          <h2 id="listing-title">On the shelf <span class="product-count" id="productCount">—</span></h2>
-        </div>
-        <button class="refresh-button" id="refreshButton" type="button">
-          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M16.5 7.5A6.75 6.75 0 0 0 4.5 5.75L3.25 7M3.25 7V3.75M3.25 7H6.5M3.5 12.5a6.75 6.75 0 0 0 12 1.75L16.75 13m0 0v3.25M16.75 13H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>Refresh</span>
-        </button>
-      </div>
-      <p class="list-message" id="listMessage" aria-live="polite">Loading your collection…</p>
-      <div class="product-grid" id="productList" aria-live="polite"></div>
-    </section>
-  </main>
-
-  <footer class="admin-footer">
-    <a class="brand brand--footer" href="/admin.html">
-      <span class="brand-mark" aria-hidden="true">A</span>
-      <span>atelier<span class="brand-light"> / studio</span></span>
-    </a>
-    <p>Made with care. Managed with care.</p>
-    <a href="#page-title">Back to top ↑</a>
-  </footer>
+        <section class="panel add-panel" id="add-product" aria-labelledby="addTitle">
+          <div class="panel-heading panel-heading--form">
+            <div>
+              <p class="section-kicker">NEW LISTING</p>
+              <h2 id="addTitle">Add a product</h2>
+              <p>Enter the product details and choose a clear image.</p>
+            </div>
+            <span class="form-step"><span>01</span> Product details</span>
+          </div>
+          <form id="productForm">
+            <div class="form-grid">
+              <label class="field">
+                <span class="field-label">Product name <span class="required-mark">*</span></span>
+                <input id="name" name="name" maxlength="120" placeholder="e.g. Wireless Mouse" autocomplete="off" required>
+              </label>
+              <label class="field">
+                <span class="field-label">Price <span class="required-mark">*</span></span>
+                <span class="price-input"><span aria-hidden="true">PKR</span><input id="price" name="price" type="number" min="0" step="any" placeholder="0.00" required></span>
+              </label>
+              <label class="field field--wide">
+                <span class="field-label">Description <span class="field-optional">Optional</span></span>
+                <textarea id="description" name="description" maxlength="2000" rows="3" placeholder="Add a few details to help people understand the product."></textarea>
+              </label>
+              <div class="field field--wide">
+                <span class="field-label">Product image <span class="required-mark">*</span></span>
+                <label class="upload-zone" for="image">
+                  <input id="image" name="image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
+                  <span class="upload-preview" id="uploadPreview" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="upload-copy"><strong id="uploadTitle">Choose an image <span>or drag it here</span></strong><span id="uploadHint">JPG, PNG or WEBP · up to 5 MB</span></span>
+                  <span class="upload-browse">Browse files</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-footer">
+              <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+              <div class="form-actions">
+                <button class="button button--secondary" id="cancelEdit" type="button" hidden>Cancel</button>
+                <button class="button button--primary" type="submit"><span id="submitLabel">Add product</span><span aria-hidden="true">↗</span></button>
+              </div>
+            </div>
+          </form>
+        </section>
+        <footer class="dashboard-footer"><span>Stockroom</span><span>Product management workspace</span></footer>
+      </main>
+    </div>
+  </div>
 
   <script>
     const form = document.querySelector("#productForm")
+    const formTitle = document.querySelector("#addTitle")
     const formMessage = document.querySelector("#formMessage")
     const listMessage = document.querySelector("#listMessage")
-    const productList = document.querySelector("#productList")
-    const refreshButton = document.querySelector("#refreshButton")
+    const productRows = document.querySelector("#productRows")
     const productCount = document.querySelector("#productCount")
+    const latestProduct = document.querySelector("#latestProduct")
+    const latestDate = document.querySelector("#latestDate")
+    const resultCount = document.querySelector("#resultCount")
+    const refreshButton = document.querySelector("#refreshButton")
+    const searchInput = document.querySelector("#productSearch")
     const imageInput = form.elements.image
     const uploadPreview = document.querySelector("#uploadPreview")
     const uploadTitle = document.querySelector("#uploadTitle")
     const uploadHint = document.querySelector("#uploadHint")
+    const menuButton = document.querySelector("#menuButton")
+    const sidebar = document.querySelector("#sidebar")
+    const cancelEditButton = document.querySelector("#cancelEdit")
+    const submitLabel = document.querySelector("#submitLabel")
+    let products = []
     let previewUrl = null
+    let editingProduct = null
+    let currentImage = ""
 
     async function readResponse(response) {
       const result = await response.json()
@@ -146,72 +185,186 @@
       return result
     }
 
-    function renderProducts(products) {
-      productList.replaceChildren()
-      productCount.textContent = String(products.length).padStart(2, "0")
+    function formatPrice(price) {
+      return Number(price).toLocaleString(undefined, {
+        style: "currency",
+        currency: "PKR",
+        maximumFractionDigits: 2
+      })
+    }
+
+    function formatDate(date) {
+      if (!date) return "—"
+      const parsed = new Date(date)
+      return Number.isNaN(parsed.getTime())
+        ? "—"
+        : parsed.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })
+    }
+
+    function renderProducts() {
+      const query = searchInput.value.trim().toLowerCase()
+      const visibleProducts = products.filter((product) =>
+        `${product.name} ${product.description || ""}`.toLowerCase().includes(query)
+      )
+      productRows.replaceChildren()
+      resultCount.textContent = query
+        ? `${visibleProducts.length} of ${products.length} products`
+        : `${products.length} ${products.length === 1 ? "product" : "products"}`
+
       if (!products.length) {
-        listMessage.innerHTML = '<div class="empty-state"><span class="empty-mark" aria-hidden="true">✳</span><strong>Your shelf is still empty.</strong><span>Add a product above to start your collection.</span></div>'
+        listMessage.className = "table-state"
+        listMessage.innerHTML = '<div class="empty-state"><span class="empty-state-icon">▦</span><strong>Your catalog is empty</strong><span>Add a product below to see it here.</span><a class="text-link" href="#add-product">Add your first product <span aria-hidden="true">→</span></a></div>'
+        return
+      }
+      if (!visibleProducts.length) {
+        listMessage.className = "table-state"
+        listMessage.textContent = `No products match “${searchInput.value.trim()}”.`
         return
       }
       listMessage.textContent = ""
-      for (const product of products) {
-        const card = document.createElement("article")
-        card.className = "product-card"
+      listMessage.className = "table-state table-state--hidden"
 
+      for (const product of visibleProducts) {
+        const row = document.createElement("tr")
+        const productCell = document.createElement("td")
+        const productIdentity = document.createElement("div")
+        productIdentity.className = "product-identity"
         if (product.image) {
           const image = document.createElement("img")
-          image.className = "product-image"
+          image.className = "table-thumbnail"
           image.src = product.image
-          image.alt = product.name
+          image.alt = ""
           image.loading = "lazy"
-          const imageFrame = document.createElement("div")
-          imageFrame.className = "product-image-frame"
-          imageFrame.append(image)
-          card.append(imageFrame)
+          productIdentity.append(image)
         } else {
-          const placeholder = document.createElement("div")
-          placeholder.className = "product-image product-image--empty"
-          placeholder.textContent = "A closer look, coming soon"
-          card.append(placeholder)
+          const placeholder = document.createElement("span")
+          placeholder.className = "table-thumbnail table-thumbnail--empty"
+          placeholder.textContent = "—"
+          productIdentity.append(placeholder)
         }
-
-        const details = document.createElement("div")
-        details.className = "product-details"
-        const meta = document.createElement("div")
-        meta.className = "product-meta"
-        const category = document.createElement("span")
-        category.textContent = "IN THE COLLECTION"
-        const date = document.createElement("span")
-        date.textContent = product.createdAt
-          ? new Date(product.createdAt).toLocaleDateString(undefined, { day: "2-digit", month: "short", year: "numeric" })
-          : "JUST ADDED"
-        meta.append(category, date)
-        const name = document.createElement("h3")
+        const name = document.createElement("strong")
         name.textContent = product.name
-        const description = document.createElement("p")
+        productIdentity.append(name)
+        productCell.append(productIdentity)
+        const description = document.createElement("td")
+        description.className = "description-cell"
         description.textContent = product.description || "No description"
-        const price = document.createElement("p")
-        price.className = "product-price"
-        price.textContent = Number(product.price).toLocaleString(undefined, {
-          style: "currency",
-          currency: "PKR",
-          maximumFractionDigits: 2
-        })
-        details.append(meta, name, description, price)
-        card.append(details)
-        productList.append(card)
+        const price = document.createElement("td")
+        price.className = "price-cell"
+        price.textContent = formatPrice(product.price)
+        const date = document.createElement("td")
+        date.className = "date-cell"
+        date.textContent = formatDate(product.createdAt)
+        const actions = document.createElement("td")
+        actions.className = "actions-cell"
+        const actionGroup = document.createElement("div")
+        actionGroup.className = "row-actions"
+        const editButton = document.createElement("button")
+        editButton.className = "row-action"
+        editButton.type = "button"
+        editButton.textContent = "Edit"
+        editButton.setAttribute("aria-label", `Edit ${product.name}`)
+        editButton.addEventListener("click", () => startEdit(product))
+        const deleteButton = document.createElement("button")
+        deleteButton.className = "row-action row-action--danger"
+        deleteButton.type = "button"
+        deleteButton.textContent = "Delete"
+        deleteButton.setAttribute("aria-label", `Delete ${product.name}`)
+        deleteButton.addEventListener("click", () => deleteProduct(product))
+        actionGroup.append(editButton, deleteButton)
+        actions.append(actionGroup)
+        row.append(productCell, description, price, date, actions)
+        productRows.append(row)
       }
+    }
+
+    function showImagePreview(image, fileName = "") {
+      if (previewUrl && previewUrl.startsWith("blob:")) URL.revokeObjectURL(previewUrl)
+      previewUrl = image.startsWith("blob:") ? image : null
+      uploadPreview.style.backgroundImage = image ? `url("${image}")` : ""
+      uploadPreview.classList.toggle("has-image", Boolean(image))
+      if (fileName) {
+        uploadTitle.textContent = fileName
+        uploadHint.textContent = `${(imageInput.files[0].size / (1024 * 1024)).toFixed(2)} MB · Ready to upload`
+      } else if (image) {
+        uploadTitle.textContent = "Current product image"
+        uploadHint.textContent = "Choose another image to replace it"
+      } else {
+        clearImagePreview()
+      }
+      document.querySelector(".upload-zone").classList.toggle("has-file", Boolean(image))
+    }
+
+    function startEdit(product) {
+      editingProduct = product
+      currentImage = product.image || ""
+      formTitle.textContent = `Edit ${product.name}`
+      submitLabel.textContent = "Save changes"
+      cancelEditButton.hidden = false
+      form.elements.name.value = product.name
+      form.elements.description.value = product.description || ""
+      form.elements.price.value = product.price
+      imageInput.required = false
+      imageInput.value = ""
+      showImagePreview(currentImage)
+      formMessage.textContent = ""
+      document.querySelector("#add-product").scrollIntoView({ behavior: "smooth", block: "start" })
+      form.elements.name.focus({ preventScroll: true })
+    }
+
+    function resetProductForm() {
+      editingProduct = null
+      currentImage = ""
+      form.reset()
+      imageInput.required = true
+      formTitle.textContent = "Add a product"
+      submitLabel.textContent = "Add product"
+      cancelEditButton.hidden = true
+      clearImagePreview()
+    }
+
+    async function deleteProduct(product) {
+      if (!window.confirm(`Delete "${product.name}"? This cannot be undone.`)) return
+
+      try {
+        const response = await fetch(`/product/${encodeURIComponent(product._id)}`, { method: "DELETE" })
+        await readResponse(response)
+        if (editingProduct?._id === product._id) resetProductForm()
+        formMessage.textContent = `${product.name} was deleted.`
+        formMessage.className = "form-message form-message--success"
+        await loadProducts()
+      } catch (error) {
+        listMessage.className = "table-state table-state--error"
+        listMessage.textContent = error.message || "Could not delete product"
+      }
+    }
+
+    function updateOverview() {
+      productCount.textContent = products.length.toLocaleString()
+      const latest = products
+        .filter((product) => product.createdAt && !Number.isNaN(new Date(product.createdAt).getTime()))
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]
+      latestProduct.textContent = latest ? latest.name : "No products yet"
+      latestDate.textContent = latest ? `Added ${formatDate(latest.createdAt)}` : "Your latest listing will appear here"
     }
 
     async function loadProducts() {
       refreshButton.disabled = true
       refreshButton.classList.add("is-loading")
+      listMessage.className = "table-state"
       listMessage.textContent = "Loading products…"
       try {
         const result = await readResponse(await fetch("/product"))
-        renderProducts(result.data)
+        products = result.data.slice().sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
+        updateOverview()
+        renderProducts()
       } catch (error) {
         productCount.textContent = "—"
+        latestProduct.textContent = "Unavailable"
+        latestDate.textContent = "Could not read the product catalog"
+        productRows.replaceChildren()
+        resultCount.textContent = "Catalog unavailable"
+        listMessage.className = "table-state table-state--error"
         listMessage.textContent = error.message || "Could not load products"
       } finally {
         refreshButton.disabled = false
@@ -229,62 +382,82 @@
       const hint = document.createElement("span")
       hint.textContent = "or drag it here"
       uploadTitle.append(hint)
-      uploadHint.innerHTML = 'JPG, PNG or WEBP <span class="upload-separator">·</span> up to 5 MB'
+      uploadHint.textContent = "JPG, PNG or WEBP · up to 5 MB"
       document.querySelector(".upload-zone").classList.remove("has-file")
     }
 
     imageInput.addEventListener("change", () => {
       const file = imageInput.files[0]
       if (!file) {
-        clearImagePreview()
+        if (!editingProduct) clearImagePreview()
         return
       }
-      if (previewUrl) URL.revokeObjectURL(previewUrl)
-      previewUrl = URL.createObjectURL(file)
-      uploadPreview.style.backgroundImage = `url("${previewUrl}")`
-      uploadPreview.classList.add("has-image")
-      uploadTitle.textContent = file.name
-      uploadHint.textContent = `${(file.size / (1024 * 1024)).toFixed(2)} MB · Ready to upload`
-      document.querySelector(".upload-zone").classList.add("has-file")
+      showImagePreview(URL.createObjectURL(file), file.name)
     })
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault()
       formMessage.textContent = ""
-      const button = form.querySelector("button")
+      formMessage.className = "form-message"
+      const button = form.querySelector('button[type="submit"]')
       button.disabled = true
       button.setAttribute("aria-busy", "true")
+      formMessage.textContent = "Uploading image…"
       try {
-        const imageFile = form.elements.image.files[0]
-        const uploadForm = new FormData()
-        uploadForm.append("image", imageFile)
-        const uploaded = await readResponse(await fetch("/upload", {
-          method: "POST",
-          body: uploadForm
-        }))
+        let image = currentImage
+        if (imageInput.files[0]) {
+          formMessage.textContent = "Uploading image…"
+          const uploadForm = new FormData()
+          uploadForm.append("image", imageInput.files[0])
+          const uploaded = await readResponse(await fetch("/upload", {
+            method: "POST",
+            body: uploadForm
+          }))
+          image = uploaded.image
+        }
 
-        await readResponse(await fetch("/product", {
-          method: "POST",
+        formMessage.textContent = "Saving product…"
+        const url = editingProduct
+          ? `/product/${encodeURIComponent(editingProduct._id)}`
+          : "/product"
+        await readResponse(await fetch(url, {
+          method: editingProduct ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name: form.elements.name.value.trim(),
             description: form.elements.description.value.trim(),
             price: Number(form.elements.price.value),
-            image: uploaded.image
+            image
           })
         }))
-        form.reset()
-        formMessage.textContent = "Product added successfully."
+        const successMessage = editingProduct ? "Product updated successfully." : "Product added successfully."
+        resetProductForm()
+        formMessage.textContent = successMessage
+        formMessage.classList.add("form-message--success")
         await loadProducts()
+        document.querySelector("#products").scrollIntoView({ behavior: "smooth", block: "start" })
       } catch (error) {
         formMessage.textContent = error.message || "Could not add product"
+        formMessage.classList.add("form-message--error")
       } finally {
         button.disabled = false
         button.removeAttribute("aria-busy")
       }
     })
 
+    searchInput.addEventListener("input", renderProducts)
     refreshButton.addEventListener("click", loadProducts)
+    cancelEditButton.addEventListener("click", resetProductForm)
+    menuButton.addEventListener("click", () => {
+      const isOpen = sidebar.classList.toggle("sidebar--open")
+      menuButton.setAttribute("aria-expanded", String(isOpen))
+    })
+    sidebar.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        sidebar.classList.remove("sidebar--open")
+        menuButton.setAttribute("aria-expanded", "false")
+      })
+    })
     window.addEventListener("pagehide", () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl)
     })
