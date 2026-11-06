@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f1">
+  <title>Products · Atelier Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="products.css">
+</head>
+<body>
+  <header class="admin-nav">
+    <a class="brand" href="/admin.html" aria-label="Atelier Admin home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>atelier<span class="brand-light"> / studio</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link nav-link--active" href="#listing" aria-current="page">Products</a>
+    </nav>
+    <a class="store-link" href="/" aria-label="Visit the store">View site <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="admin-page">
+    <section class="hero admin-hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> Your workspace <span class="eyebrow-divider">/</span> Inventory</p>
+        <h1 id="page-title">Make room for<br>something <em>good.</em></h1>
+        <p class="hero-description">A thoughtful collection starts here. Add a product and it’s ready for the shop.</p>
+        <a class="hero-link" href="#add-product">Add your first product <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-orbit art-orbit--outer"></div>
+        <div class="art-orbit art-orbit--inner"></div>
+        <div class="art-sun"></div>
+        <div class="art-object">
+          <span class="art-object__stem"></span>
+          <span class="art-object__body"></span>
+          <span class="art-object__base"></span>
+        </div>
+        <span class="art-caption">OBJECTS, WITH INTENTION — 01</span>
+      </div>
+    </section>
+
+    <section class="add-section" id="add-product" aria-labelledby="add-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 <span class="eyebrow-divider">/</span> Product details</p>
+          <h2 id="add-title">Add something new</h2>
+        </div>
+        <p class="section-aside">Good things deserve<br>a place on the shelf.</p>
+      </div>
+      <div class="form-panel">
+        <form id="productForm">
+          <div class="form-fields">
+            <label class="field">
+              <span class="field-label">Product name <span class="required-mark">*</span></span>
+              <input id="name" name="name" maxlength="120" placeholder="e.g. The Everyday Tote" autocomplete="off" required>
+            </label>
+            <label class="field">
+              <span class="field-label">Price <span class="required-mark">*</span></span>
+              <span class="price-input">
+                <span aria-hidden="true">PKR</span>
+                <input id="price" name="price" type="number" min="0" step="any" placeholder="0.00" required>
+              </span>
+            </label>
+            <label class="field field--wide">
+              <span class="field-label">A little about it <span class="field-optional">Optional</span></span>
+              <textarea id="description" name="description" maxlength="2000" rows="3" placeholder="What makes this one special?"></textarea>
+            </label>
+            <div class="field field--wide">
+              <span class="field-label">Product photography <span class="required-mark">*</span></span>
+              <label class="upload-zone" for="image">
+                <input id="image" name="image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
+                <span class="upload-preview" id="uploadPreview" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="upload-copy">
+                  <strong id="uploadTitle">Choose an image <span>or drag it here</span></strong>
+                  <span id="uploadHint">JPG, PNG or WEBP <span class="upload-separator">·</span> up to 5 MB</span>
+                </span>
+                <span class="upload-browse">Browse files</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-footer">
+            <p class="form-message" id="formMessage" aria-live="polite"></p>
+            <button class="submit-button" type="submit">
+              <span>Add to products</span><span class="button-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="product-section" id="listing" aria-labelledby="listing-title">
+      <div class="section-heading section-heading--listing">
+        <div>
+          <p class="eyebrow">02 <span class="eyebrow-divider">/</span> Your collection</p>
+          <h2 id="listing-title">On the shelf <span class="product-count" id="productCount">—</span></h2>
+        </div>
+        <button class="refresh-button" id="refreshButton" type="button">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M16.5 7.5A6.75 6.75 0 0 0 4.5 5.75L3.25 7M3.25 7V3.75M3.25 7H6.5M3.5 12.5a6.75 6.75 0 0 0 12 1.75L16.75 13m0 0v3.25M16.75 13H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Refresh</span>
+        </button>
+      </div>
+      <p class="list-message" id="listMessage" aria-live="polite">Loading your collection…</p>
+      <div class="product-grid" id="productList" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="admin-footer">
+    <a class="brand brand--footer" href="/admin.html">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>atelier<span class="brand-light"> / studio</span></span>
+    </a>
+    <p>Made with care. Managed with care.</p>
+    <a href="#page-title">Back to top ↑</a>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#productForm")
+    const formMessage = document.querySelector("#formMessage")
+    const listMessage = document.querySelector("#listMessage")
+    const productList = document.querySelector("#productList")
+    const refreshButton = document.querySelector("#refreshButton")
+    const productCount = document.querySelector("#productCount")
+    const imageInput = form.elements.image
+    const uploadPreview = document.querySelector("#uploadPreview")
+    const uploadTitle = document.querySelector("#uploadTitle")
+    const uploadHint = document.querySelector("#uploadHint")
+    let previewUrl = null
+
+    async function readResponse(response) {
+      const result = await response.json()
+      if (!response.ok || result.error) {
+        throw new Error(result.errorMsg || "The request could not be completed")
+      }
+      return result
+    }
+
+    function renderProducts(products) {
+      productList.replaceChildren()
+      productCount.textContent = String(products.length).padStart(2, "0")
+      if (!products.length) {
+        listMessage.innerHTML = '<div class="empty-state"><span class="empty-mark" aria-hidden="true">✳</span><strong>Your shelf is still empty.</strong><span>Add a product above to start your collection.</span></div>'
+        return
+      }
+      listMessage.textContent = ""
+      for (const product of products) {
+        const card = document.createElement("article")
+        card.className = "product-card"
+
+        if (product.image) {
+          const image = document.createElement("img")
+          image.className = "product-image"
+          image.src = product.image
+          image.alt = product.name
+          image.loading = "lazy"
+          const imageFrame = document.createElement("div")
+          imageFrame.className = "product-image-frame"
+          imageFrame.append(image)
+          card.append(imageFrame)
+        } else {
+          const placeholder = document.createElement("div")
+          placeholder.className = "product-image product-image--empty"
+          placeholder.textContent = "A closer look, coming soon"
+          card.append(placeholder)
+        }
+
+        const details = document.createElement("div")
+        details.className = "product-details"
+        const meta = document.createElement("div")
+        meta.className = "product-meta"
+        const category = document.createElement("span")
+        category.textContent = "IN THE COLLECTION"
+        const date = document.createElement("span")
+        date.textContent = product.createdAt
+          ? new Date(product.createdAt).toLocaleDateString(undefined, { day: "2-digit", month: "short", year: "numeric" })
+          : "JUST ADDED"
+        meta.append(category, date)
+        const name = document.createElement("h3")
+        name.textContent = product.name
+        const description = document.createElement("p")
+        description.textContent = product.description || "No description"
+        const price = document.createElement("p")
+        price.className = "product-price"
+        price.textContent = Number(product.price).toLocaleString(undefined, {
+          style: "currency",
+          currency: "PKR",
+          maximumFractionDigits: 2
+        })
+        details.append(meta, name, description, price)
+        card.append(details)
+        productList.append(card)
+      }
+    }
+
+    async function loadProducts() {
+      refreshButton.disabled = true
+      refreshButton.classList.add("is-loading")
+      listMessage.textContent = "Loading products…"
+      try {
+        const result = await readResponse(await fetch("/product"))
+        renderProducts(result.data)
+      } catch (error) {
+        productCount.textContent = "—"
+        listMessage.textContent = error.message || "Could not load products"
+      } finally {
+        refreshButton.disabled = false
+        refreshButton.classList.remove("is-loading")
+      }
+    }
+
+    function clearImagePreview() {
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
+      previewUrl = null
+      uploadPreview.classList.remove("has-image")
+      uploadPreview.style.removeProperty("background-image")
+      uploadTitle.textContent = ""
+      uploadTitle.append("Choose an image ")
+      const hint = document.createElement("span")
+      hint.textContent = "or drag it here"
+      uploadTitle.append(hint)
+      uploadHint.innerHTML = 'JPG, PNG or WEBP <span class="upload-separator">·</span> up to 5 MB'
+      document.querySelector(".upload-zone").classList.remove("has-file")
+    }
+
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0]
+      if (!file) {
+        clearImagePreview()
+        return
+      }
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
+      previewUrl = URL.createObjectURL(file)
+      uploadPreview.style.backgroundImage = `url("${previewUrl}")`
+      uploadPreview.classList.add("has-image")
+      uploadTitle.textContent = file.name
+      uploadHint.textContent = `${(file.size / (1024 * 1024)).toFixed(2)} MB · Ready to upload`
+      document.querySelector(".upload-zone").classList.add("has-file")
+    })
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault()
+      formMessage.textContent = ""
+      const button = form.querySelector("button")
+      button.disabled = true
+      button.setAttribute("aria-busy", "true")
+      try {
+        const imageFile = form.elements.image.files[0]
+        const uploadForm = new FormData()
+        uploadForm.append("image", imageFile)
+        const uploaded = await readResponse(await fetch("/upload", {
+          method: "POST",
+          body: uploadForm
+        }))
+
+        await readResponse(await fetch("/product", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: form.elements.name.value.trim(),
+            description: form.elements.description.value.trim(),
+            price: Number(form.elements.price.value),
+            image: uploaded.image
+          })
+        }))
+        form.reset()
+        formMessage.textContent = "Product added successfully."
+        await loadProducts()
+      } catch (error) {
+        formMessage.textContent = error.message || "Could not add product"
+      } finally {
+        button.disabled = false
+        button.removeAttribute("aria-busy")
+      }
+    })
+
+    refreshButton.addEventListener("click", loadProducts)
+    window.addEventListener("pagehide", () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
+    })
+    loadProducts()
+  </script>
+</body>
+</html>
